@@ -32,7 +32,7 @@ namespace SnakeGame3
         public SnakeGame()
         {
             InitializeComponent();
-            columns = 40; rows = 40; //siatka 
+            columns = 40; rows = 40; //grid
             snakeArray = new int[columns, rows];
             foodArray = new int[columns, rows];
             startX = columns / 2;
@@ -40,16 +40,16 @@ namespace SnakeGame3
             snakeX = startX;
             snakeY = startY;
             StartTimer();
-            this.DoubleBuffered = true; //zapobiega miganiu okna
+            this.DoubleBuffered = true; //prevents flickering
             NewGame();
         }
         private void StartTimer()
         {
-            timer.Interval = 30; //predkosc weza
+            timer.Interval = 30; //snake speed
             timer.Tick += Update;
             timer.Start();
         }
-        private void SnakeGame_Paint(object sender, PaintEventArgs e) //rysowanie weza
+        private void SnakeGame_Paint(object sender, PaintEventArgs e) //drawing snake and food
         {
             int counter = 1;
             Graphics gfx = e.Graphics;
@@ -68,7 +68,7 @@ namespace SnakeGame3
             }
         }
 
-        private void SnakeGame_KeyDown(object sender, KeyEventArgs e) //kierunek ruchu
+        private void SnakeGame_KeyDown(object sender, KeyEventArgs e) //movement direction
         {
             switch (e.KeyCode)
             {
@@ -107,7 +107,7 @@ namespace SnakeGame3
             snakeX = startX;
             snakeY = startY;
             snakeLength = 0;
-            startLength = 12;
+            startLength = 4;
             snakeArray[snakeX, snakeY] = 1;
             snakePointQueue.Enqueue(new Point(snakeX, snakeY));
             Point fPoint = new Point(random.Next(columns) - 1, random.Next(rows) - 3);
@@ -123,7 +123,7 @@ namespace SnakeGame3
                 {
                     case "left":
                         if (snakeX != 0) { snakeX--; }
-                        else { snakeX = columns - 1; } //przechodzenie przez brzegi
+                        else { snakeX = columns - 1; } //going through border
                         break;
                     case "right":
                         if (snakeX != columns - 1) { snakeX++; }
@@ -143,9 +143,9 @@ namespace SnakeGame3
                 if (snakeArray[snakeX, snakeY] == 0)
                 {
                     snakeArray[snakeX, snakeY] = 1;
-                    snakePointQueue.Enqueue(new Point(snakeX, snakeY)); //przesuwanie sie weza (ruch)
+                    snakePointQueue.Enqueue(new Point(snakeX, snakeY)); //snake movement
                 }
-                else //ugryzienie samego siebie (kolizja)
+                else //eating yourself (collision)
                 {
                     timer.Enabled = false;
                     score = snakeLength - startLength;
@@ -153,16 +153,16 @@ namespace SnakeGame3
                     SaveScores();
                     MessageBox.Show(" Przegrales!\n Twoj wynik: " + score.ToString() + "\n \"R\" resetuje gre" + "\n" + readFile);
                 }
-                if (foodArray[snakeX, snakeY] != 1 && snakeLength >= startLength) //jedznie niezjedzone
+                if (foodArray[snakeX, snakeY] != 1 && snakeLength >= startLength) //food not eaten
                 {
                     Point dequeue = snakePointQueue.Dequeue();
                     snakeArray[dequeue.X, dequeue.Y] = 0;
                 }
-                else if (snakeLength < startLength) //rozpoczecie gry
+                else if (snakeLength < startLength) //start game
                 {
                     snakeLength++;
                 }
-                else //jedzenie zjedzone
+                else //food eaten
                 {
                     snakeLength++;
                     foodArray[snakeX, snakeY] = 0;
@@ -170,18 +170,6 @@ namespace SnakeGame3
                     foodPoint[0] = fPoint;
                     foodArray[fPoint.X, fPoint.Y] = 1;
                 }
-/*                if (snakeY == 18)
-                {
-                    direction = "left";
-                    if (snakeX == 14)
-                        direction = "up";
-                }
-                else if (snakeY == 14)
-                {
-                    direction = "right";
-                    if (snakeX == 18)
-                        direction = "down";
-                }*/
             }
             Refresh();
         }
@@ -190,7 +178,7 @@ namespace SnakeGame3
             var lineCount = 1;
             if (!File.Exists(filePath))
             {
-                using (var scoreToFile = File.CreateText(filePath))//tworzenie pliku .txt
+                using (var scoreToFile = File.CreateText(filePath))//creating .txt file
                 {
                     scoreToFile.WriteLine(lineCount + ". Gra - " + score + " Punktow");
                 }
@@ -199,9 +187,9 @@ namespace SnakeGame3
             {
                 using (var reader = File.OpenText(filePath))
                 {
-                    while (reader.ReadLine() != null) { lineCount++; } //zczytywanie ilosci linijek w pliku
+                    while (reader.ReadLine() != null) { lineCount++; } //reading number of lines from file
                 }
-                using (var scoreToFile = File.AppendText(filePath))//tworzenie nowych linijek w pliku
+                using (var scoreToFile = File.AppendText(filePath))//creating new lines in file
                 {
                     scoreToFile.WriteLine(lineCount + ". Gra - " + score + " Punktow");
                 }

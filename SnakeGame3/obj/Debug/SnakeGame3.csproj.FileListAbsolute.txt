@@ -8,3 +8,13 @@ D:\VS Studio Projects\SnakeGame3\SnakeGame3\bin\Debug\SnakeGame3.pdb
 D:\VS Studio Projects\SnakeGame3\SnakeGame3\obj\Debug\SnakeGame3.SnakeGame.resources
 D:\VS Studio Projects\SnakeGame3\SnakeGame3\obj\Debug\SnakeGame3.exe
 D:\VS Studio Projects\SnakeGame3\SnakeGame3\obj\Debug\SnakeGame3.pdb
+D:\SnakeGame\SnakeGame\SnakeGame3\bin\Debug\SnakeGame3.exe.config
+D:\SnakeGame\SnakeGame\SnakeGame3\bin\Debug\SnakeGame3.exe
+D:\SnakeGame\SnakeGame\SnakeGame3\bin\Debug\SnakeGame3.pdb
+D:\SnakeGame\SnakeGame\SnakeGame3\obj\Debug\SnakeGame3.csprojAssemblyReference.cache
+D:\SnakeGame\SnakeGame\SnakeGame3\obj\Debug\SnakeGame3.SnakeGame.resources
+D:\SnakeGame\SnakeGame\SnakeGame3\obj\Debug\SnakeGame3.Properties.Resources.resources
+D:\SnakeGame\SnakeGame\SnakeGame3\obj\Debug\SnakeGame3.csproj.GenerateResource.cache
+D:\SnakeGame\SnakeGame\SnakeGame3\obj\Debug\SnakeGame3.csproj.CoreCompileInputs.cache
+D:\SnakeGame\SnakeGame\SnakeGame3\obj\Debug\SnakeGame3.exe
+D:\SnakeGame\SnakeGame\SnakeGame3\obj\Debug\SnakeGame3.pdb
